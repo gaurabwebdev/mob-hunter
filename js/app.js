@@ -7,6 +7,12 @@ const loadMobiles = async(searchValue) =>{
 }
 
 const displayMobiles = (mobiles) => {
+    // console.log(mobiles)
+    if(mobiles.length === 0){
+        errorMsg(true)
+    } else{
+        errorMsg(false)
+    }
     const mobilesSection = document.getElementById('mobiles-container');
     mobilesSection.innerHTML = '';
     mobiles.forEach((mobile) => {
@@ -41,12 +47,20 @@ const displayMobiles = (mobiles) => {
 
 // Search Functionality From Btn
 const searchBtn = document.getElementById('search-btn');
-searchBtn.addEventListener('click', function(e){
+searchBtn.addEventListener('click', function(){
     const searchField = document.getElementById('search-field');
     loadMobiles(searchField.value);
 })
 
-
+// Error Message Functionality
+const errorMsg = (status) =>{
+    const messageElement = document.getElementById('error-msg');
+    if(status){
+        messageElement.classList.remove('d-none');
+    } else {
+        messageElement.classList.add('d-none');
+    }
+}
 
 
 
