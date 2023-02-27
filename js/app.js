@@ -1,3 +1,4 @@
+
 // Data Loading From API
 const loadMobiles = async(searchValue, dataLimit) =>{
     const url = `https://openapi.programming-hero.com/api/phones?search=${searchValue}`;
@@ -58,7 +59,6 @@ const displayMobiles = (mobiles, dataLimit) => {
     displayElement(false, 'find-msg-section');
 }
 
-
 // all data collection function
 const allPhoneShow = (dataLimit) => {
     displayElement(true, 'spinner-container');
@@ -86,6 +86,8 @@ const displayElement = (status, element) =>{
         messageElement.classList.add('d-none');
     }
 }
+
+// Single Mobile Details With Modal
 
 const showMobileDetails = async (slug) => {
     const url = `https://openapi.programming-hero.com/api/phone/${slug}`
@@ -125,6 +127,7 @@ const mobileModal = (mobileData) => {
     `;
 }
 
+// Phone ALl Display Function
 const displayAll = () =>{
     allPhoneShow();
 }
