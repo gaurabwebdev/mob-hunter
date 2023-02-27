@@ -14,7 +14,9 @@ const displayMobiles = (mobiles) => {
         mobileDiv.classList.add('col');
         mobileDiv.innerHTML = `
         <div class="card">
-            <img class="m-5 product-image" src="${image}" class="card-img-top" alt="...">
+            <div class= "p-3 mx-auto">
+                <img src="${image}" class="card-img-top w-full h-100" alt="...">
+            </div>
             <div class="card-body d-flex flex-column gap-1 justify-content-center align-items-center">
                 <h5 class="card-title">
                 ${phone_name} - 
