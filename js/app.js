@@ -1,5 +1,6 @@
-const loadMobiles = async() =>{
-    const url = `https://openapi.programming-hero.com/api/phones?search=iphone`;
+// Data Loading From API
+const loadMobiles = async(searchValue) =>{
+    const url = `https://openapi.programming-hero.com/api/phones?search=${searchValue}`;
     const response = await fetch(url);
     const data = await response.json();
     displayMobiles(data.data);
@@ -7,6 +8,7 @@ const loadMobiles = async() =>{
 
 const displayMobiles = (mobiles) => {
     const mobilesSection = document.getElementById('mobiles-container');
+    mobilesSection.innerHTML = '';
     mobiles.forEach((mobile) => {
         // console.log(mobile);
         const {brand, image, phone_name, slug} = mobile;
@@ -37,7 +39,14 @@ const displayMobiles = (mobiles) => {
     })
 }
 
-loadMobiles();
+// Search Functionality From Btn
+const searchBtn = document.getElementById('search-btn');
+searchBtn.addEventListener('click', function(e){
+    const searchField = document.getElementById('search-field');
+    loadMobiles(searchField.value);
+})
+
+
 
 
 
