@@ -1,17 +1,25 @@
 // Data Loading From API
-const loadMobiles = async(searchValue) =>{
+const loadMobiles = async(searchValue, dataLimit) =>{
     const url = `https://openapi.programming-hero.com/api/phones?search=${searchValue}`;
     const response = await fetch(url);
     const data = await response.json();
-    displayMobiles(data.data);
+    displayMobiles(data.data, dataLimit);
 }
 
-const displayMobiles = (mobiles) => {
-    // console.log(mobiles)
+// Display Data From API To DOM
+const displayMobiles = (mobiles, dataLimit) => {
+    console.log(mobiles)
     if(mobiles.length === 0){
         displayElement(true, 'error-msg')
     } else{
         displayElement(false, 'error-msg')
+    }
+
+    if(dataLimit && mobiles.length > 10){
+        mobiles = mobiles.slice(0,10);
+        displayElement(true, 'show-all-btn-div');
+    } else {
+        displayElement(false, 'show-all-btn-div');
     }
     const mobilesSection = document.getElementById('mobiles-container');
     mobilesSection.innerHTML = '';
@@ -26,16 +34,19 @@ const displayMobiles = (mobiles) => {
                 <img src="${image}" class="card-img-top w-full h-100" alt="...">
             </div>
             <div class="card-body d-flex flex-column gap-1 justify-content-center align-items-center">
-                <h5 class="card-title">
-                ${phone_name} - 
+                <h5 class="card-title text-center">
+                ${phone_name} 
                 </h5>
-                <h5 class="card-title ms-2">
+                <h5 class="card-title">
                 ${brand}
                 </h5>
 
                 <div>
                     <button class="btn btn-primary">
                         Details
+                    </button>
+                    <button class="btn btn-info">
+                        Show Details
                     </button>
                 </div>
             </div>
@@ -46,16 +57,16 @@ const displayMobiles = (mobiles) => {
     displayElement(false, 'spinner-container');
 }
 
-// Search Functionality From Btn
-const searchBtn = document.getElementById('search-btn');
-
-searchBtn.addEventListener('click', function(){
-    const searchField = document.getElementById('search-field');
-    loadMobiles(searchField.value);
+const allPhoneShow = (dataLimit) => {
     displayElement(true, 'spinner-container');
+    const searchField = document.getElementById('search-field');
+    loadMobiles(searchField.value, dataLimit);
+}
 
-    searchField.value = '';
-})
+// Search Functionality From Btn
+const searchBtn = () => {
+    allPhoneShow(10);
+}
 
 // Error Message & Spinner Display Functionality
 const displayElement = (status, element) =>{
@@ -68,6 +79,9 @@ const displayElement = (status, element) =>{
 }
 
 
+const displayAll = () =>{
+    allPhoneShow();
+}
 
 
 

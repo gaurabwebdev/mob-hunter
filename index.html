@@ -21,7 +21,7 @@
                     </div>
                     <div class="search-section">
                         <input type="search" name="" id="search-field"class = "p-1 rounded" placeholder="search Your Mobile">
-                        <button id="search-btn" class="btn btn-info">
+                        <button onclick="searchBtn()" id="search-btn" class="btn btn-info">
                             Search
                         </button>
                     </div>
@@ -59,6 +59,11 @@
                     <div class="container">
                         <div id="mobiles-container" class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4 mt-2">
                             
+                        </div>
+                        <div id="show-all-btn-div" class="text-center d-none">
+                            <button onclick="displayAll()" id="all-btn" class="btn btn-danger mt-5">
+                                Show All
+                            </button>
                         </div>
                     </div>
                 </section>
