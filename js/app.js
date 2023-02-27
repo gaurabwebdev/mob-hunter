@@ -15,13 +15,19 @@ const displayMobiles = (mobiles) => {
         mobileDiv.innerHTML = `
         <div class="card">
             <img class="m-5 product-image" src="${image}" class="card-img-top" alt="...">
-            <div class="card-body">
+            <div class="card-body d-flex flex-column gap-1 justify-content-center align-items-center">
                 <h5 class="card-title">
-                ${phone_name}
+                ${phone_name} - 
                 </h5>
-                <h5 class="card-title">
+                <h5 class="card-title ms-2">
                 ${brand}
                 </h5>
+
+                <div>
+                    <button class="btn btn-primary">
+                        Details
+                    </button>
+                </div>
             </div>
         </div>
         `;
