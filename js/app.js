@@ -8,7 +8,7 @@ const loadMobiles = async(searchValue, dataLimit) =>{
 
 // Display Data From API To DOM
 const displayMobiles = (mobiles, dataLimit) => {
-    console.log(mobiles)
+    // console.log(mobiles)
     if(mobiles.length === 0){
         displayElement(true, 'error-msg')
     } else{
@@ -43,7 +43,7 @@ const displayMobiles = (mobiles, dataLimit) => {
 
                 <div>
                     <button class="btn btn-primary">
-                        Details
+                        Buy Now
                     </button>
                     <button class="btn btn-info">
                         Show Details
@@ -55,8 +55,11 @@ const displayMobiles = (mobiles, dataLimit) => {
         mobilesSection.appendChild(mobileDiv);
     })
     displayElement(false, 'spinner-container');
+    displayElement(false, 'find-msg-section');
 }
 
+
+// all data collection function
 const allPhoneShow = (dataLimit) => {
     displayElement(true, 'spinner-container');
     const searchField = document.getElementById('search-field');
