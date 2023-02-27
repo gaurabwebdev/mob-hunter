@@ -9,9 +9,9 @@ const loadMobiles = async(searchValue) =>{
 const displayMobiles = (mobiles) => {
     // console.log(mobiles)
     if(mobiles.length === 0){
-        errorMsg(true)
+        errorMsg(true, 'error-msg')
     } else{
-        errorMsg(false)
+        errorMsg(false, 'error-msg')
     }
     const mobilesSection = document.getElementById('mobiles-container');
     mobilesSection.innerHTML = '';
@@ -50,11 +50,12 @@ const searchBtn = document.getElementById('search-btn');
 searchBtn.addEventListener('click', function(){
     const searchField = document.getElementById('search-field');
     loadMobiles(searchField.value);
+    searchField.value = '';
 })
 
 // Error Message Functionality
-const errorMsg = (status) =>{
-    const messageElement = document.getElementById('error-msg');
+const errorMsg = (status, element) =>{
+    const messageElement = document.getElementById(element);
     if(status){
         messageElement.classList.remove('d-none');
     } else {
