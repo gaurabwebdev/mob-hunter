@@ -24,7 +24,7 @@ const displayMobiles = (mobiles, dataLimit) => {
     const mobilesSection = document.getElementById('mobiles-container');
     mobilesSection.innerHTML = '';
     mobiles.forEach((mobile) => {
-        // console.log(mobile);
+        console.log(mobile);
         const {brand, image, phone_name, slug} = mobile;
         const mobileDiv = document.createElement('div');
         mobileDiv.classList.add('col');
@@ -45,8 +45,8 @@ const displayMobiles = (mobiles, dataLimit) => {
                     <button class="btn btn-primary">
                         Buy Now
                     </button>
-                    <button class="btn btn-info">
-                        Show Details
+                    <button onclick="showMobileDetails('${slug}')" type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#mobileModal">
+                        Details
                     </button>
                 </div>
             </div>
@@ -66,10 +66,16 @@ const allPhoneShow = (dataLimit) => {
     loadMobiles(searchField.value, dataLimit);
 }
 
-// Search Functionality From Btn
+// Search Functionality From Btn / Input Field
 const searchBtn = () => {
     allPhoneShow(10);
 }
+
+document.getElementById('search-field').addEventListener('keydown', function(e){
+    if(e.key === 'Enter'){
+        allPhoneShow(10);
+    }
+})
 
 // Error Message & Spinner Display Functionality
 const displayElement = (status, element) =>{
@@ -81,6 +87,43 @@ const displayElement = (status, element) =>{
     }
 }
 
+const showMobileDetails = async (slug) => {
+    const url = `https://openapi.programming-hero.com/api/phone/${slug}`
+    const mobile = await fetch(url);
+    const res = await mobile.json();
+    mobileModal(res.data);
+}
+
+const mobileModal = (mobileData) => {
+    // console.log(mobileData);
+    const {name, image, releaseDate, mainFeatures} = mobileData;
+    const {displaySize, chipSet, storage} = mainFeatures;
+    const modalTitle = document.getElementById('mobileModalLabel');
+    modalTitle.innerText = `${name} ${releaseDate}`;
+    const modalBody = document.getElementById('mobile-details');
+    modalBody.innerHTML = `
+        <div class="d-flex justify-content-start align-items-center gap-3">
+            <img src="${image}">
+            <p class="d-flex flex-column justify-content-start align-items-center">
+                <span>
+                    Main Features
+                </span>
+                <span>
+                    Processor - ${chipSet}
+                </span>
+                <span>
+                    Display - ${displaySize}
+                </span>
+                <span>
+                    Storage - ${storage}
+                </span>
+            </p>
+        </div>
+        <div>
+
+        </div>
+    `;
+}
 
 const displayAll = () =>{
     allPhoneShow();
